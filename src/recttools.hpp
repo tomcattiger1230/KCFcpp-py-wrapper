@@ -1,7 +1,7 @@
-/* 
+/*
 Author: Christian Bailer
-Contact address: Christian.Bailer@dfki.de 
-Department Augmented Vision DFKI 
+Contact address: Christian.Bailer@dfki.de
+Department Augmented Vision DFKI
 
                           License Agreement
                For Open Source Computer Vision Library
@@ -129,7 +129,7 @@ inline cv::Mat subwindow(const cv::Mat &in, const cv::Rect & window, int borderT
 
 inline cv::Mat getGrayImage(cv::Mat img)
 {
-    cv::cvtColor(img, img, CV_BGR2GRAY);
+    cv::cvtColor(img, img, cv::COLOR_BGRA2GRAY);  // CV_BGR2GRAY
     img.convertTo(img, CV_32F, 1 / 255.f);
     return img;
 }
