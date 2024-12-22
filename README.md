@@ -1,25 +1,25 @@
 I write a python wrapper for [KCFcpp](https://github.com/joaofaro/KCFcpp), some of the code are modified from http://nicellama.blogspot.com/2015/06/cython-wrapper-between-opencv-mat-in-c.html .
 
-Requirements
------
-* Python 2.7
-* NumPy
-* Cython
-* OpenCV (both C++ and Python interfaces)
+## Requirements
 
-Build
------------
+- Python 3.12
+- NumPy
+- Cython
+- OpenCV (both C++ and Python interfaces)
+
+## Build
 
 ```
 python setup.py build_ext --inplace
 ```
+
 or
+
 ```
 python setup.py install
 ```
 
-Usage
------
+## Usage
 
 ```
 python run.py
@@ -27,69 +27,71 @@ python run.py 1
 python run.py test.avi
 ```
 
-References
------
-1. *Cython: A Guide for Python Programmers* by Kurt Smith<br>
+## References
+
+1. _Cython: A Guide for Python Programmers_ by Kurt Smith<br>
 2. Cython wrapper between opencv Mat in C++ and numpy http://nicellama.blogspot.com/2015/06/cython-wrapper-between-opencv-mat-in-c.html
 
 <br>
 
 ---
-***ORIGINAL README:***
+
+**_ORIGINAL README:_**
 
 # C++ KCF Tracker
-This package includes a C++ class with several tracking methods based on the Kernelized Correlation Filter (KCF) [1, 2].   
+
+This package includes a C++ class with several tracking methods based on the Kernelized Correlation Filter (KCF) [1, 2].
 It also includes an executable to interface with the VOT benchmark.
 
-[1] J. F. Henriques, R. Caseiro, P. Martins, J. Batista,   
+[1] J. F. Henriques, R. Caseiro, P. Martins, J. Batista,
 "High-Speed Tracking with Kernelized Correlation Filters", TPAMI 2015.
 
-[2] J. F. Henriques, R. Caseiro, P. Martins, J. Batista,   
+[2] J. F. Henriques, R. Caseiro, P. Martins, J. Batista,
 "Exploiting the Circulant Structure of Tracking-by-detection with Kernels", ECCV 2012.
 
+Authors: Joao Faro, Christian Bailer, Joao F. Henriques
+Contacts: joaopfaro@gmail.com, Christian.Bailer@dfki.de, henriques@isr.uc.pt
+Institute of Systems and Robotics - University of Coimbra / Department of Augmented Vision DFKI
 
-Authors: Joao Faro, Christian Bailer, Joao F. Henriques   
-Contacts: joaopfaro@gmail.com, Christian.Bailer@dfki.de, henriques@isr.uc.pt   
-Institute of Systems and Robotics - University of Coimbra / Department of Augmented Vision DFKI   
+### Algorithms (in this folder)
 
-### Algorithms (in this folder) ###
-
-"KCFC++", command: ./KCF   
+"KCFC++", command: ./KCF
 Description: KCF on HOG features, ported to C++ OpenCV. The original Matlab tracker placed 3rd in VOT 2014.
 
-"KCFLabC++", command: ./KCF lab   
-Description: KCF on HOG and Lab features, ported to C++ OpenCV. The Lab features are computed by quantizing CIE-Lab colors into 15 centroids, obtained from natural images by k-means.   
+"KCFLabC++", command: ./KCF lab
+Description: KCF on HOG and Lab features, ported to C++ OpenCV. The Lab features are computed by quantizing CIE-Lab colors into 15 centroids, obtained from natural images by k-means.
 
-The CSK tracker [2] is also implemented as a bonus, simply by using raw grayscale as features (the filter becomes single-channel).   
+The CSK tracker [2] is also implemented as a bonus, simply by using raw grayscale as features (the filter becomes single-channel).
 
-### Compilation instructions ###
-There are no external dependencies other than OpenCV 3.0.0. Tested on a freshly installed Ubuntu 14.04.   
+### Compilation instructions
 
-1) cmake CMakeLists.txt   
-2) make   
+There are no external dependencies other than OpenCV 3.0.0. Tested on a freshly installed Ubuntu 14.04.
 
-### Running instructions ###
+1. cmake CMakeLists.txt
+2. make
 
-The runtracker.cpp is prepared to be used with the VOT toolkit. The executable "KCF" should be called as:   
+### Running instructions
+
+The runtracker.cpp is prepared to be used with the VOT toolkit. The executable "KCF" should be called as:
 
 ./KCF [OPTION_1] [OPTION_2] [...]
 
-Options available:   
+Options available:
 
-gray - Use raw gray level features as in [1].   
-hog - Use HOG features as in [2].   
-lab - Use Lab colorspace features. This option will also enable HOG features by default.   
-singlescale - Performs single-scale detection, using a variable-size window.   
-fixed_window - Keep the window size fixed when in single-scale mode (multi-scale always used a fixed window).   
-show - Show the results in a window.   
+gray - Use raw gray level features as in [1].
+hog - Use HOG features as in [2].
+lab - Use Lab colorspace features. This option will also enable HOG features by default.
+singlescale - Performs single-scale detection, using a variable-size window.
+fixed_window - Keep the window size fixed when in single-scale mode (multi-scale always used a fixed window).
+show - Show the results in a window.
 
 To include it in your project, without the VOT toolkit you just need to:
-	
-	// Create the KCFTracker object with one of the available options
-	KCFTracker tracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
 
-	// Give the first frame and the position of the object to the tracker
-	tracker.init( Rect(xMin, yMin, width, height), frame );
+    // Create the KCFTracker object with one of the available options
+    KCFTracker tracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
 
-	// Get the position of the object for the new frame
-	result = tracker.update(frame);
+    // Give the first frame and the position of the object to the tracker
+    tracker.init( Rect(xMin, yMin, width, height), frame );
+
+    // Get the position of the object for the new frame
+    result = tracker.update(frame);
