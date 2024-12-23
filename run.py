@@ -2,7 +2,11 @@ import numpy as np
 import cv2
 import sys
 from time import time
+import os
 
+# sys.path.append(os.path.realpath('.'))
+# print(os.path.realpath('.'))
+sys.path.append("C:\\Develop\\opencv\\x64\\vc16\\lib")
 import KCF
 
 
